@@ -60,7 +60,6 @@
             <div class="flex justify-between h-16 items-center"> <!-- Center items vertically -->
                 <div class="flex items-center">
                     <a href="#" class="flex-shrink-0 flex items-center">
-                        <!-- ** REPLACE 'url_to_your_logo.png' WITH YOUR ACTUAL LOGO IMAGE PATH/URL ** -->
                         <img class="h-10 w-auto mr-2 sm:h-12" src="logo.jpg" alt="Our Community in Unity Logo">
                         <div>
                             <span class="text-indigo-600 font-bold text-base sm:text-lg md:text-xl leading-tight block">Our Community in Unity</span>
@@ -443,7 +442,22 @@
             <p class="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto">
                 Subscribe to our newsletter for the latest updates, success stories, event invitations, and opportunities to get involved.
             </p>
-            <form action="#" method="POST" class="max-w-lg mx-auto sm:flex sm:gap-x-4">
+            <!-- MODIFIED FORM: action points to FormSubmit, added hidden fields -->
+            <form action="https://formsubmit.co/info@ourcommunity.agency" method="POST" class="max-w-lg mx-auto sm:flex sm:gap-x-4">
+                <!-- IMPORTANT: Replace info@ourcommunity.agency with your actual email for newsletter signups. -->
+                <!-- You MUST click an activation link sent to this email after the first submission via FormSubmit. -->
+
+                <!-- Optional: Redirect to a custom 'Thank You' page after subscription -->
+                <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thank-you-newsletter.html"> --> 
+                <!-- Create this page or remove this line to use FormSubmit's default thank you page. -->
+                
+                <!-- Optional: Custom subject for the email you receive for newsletter subscriptions -->
+                <input type="hidden" name="_subject" value="New Newsletter Subscription - Our Community in Unity">
+                
+                <!-- FormSubmit includes basic spam protection. For advanced protection, see their docs on reCAPTCHA. -->
+                <!-- To disable their intelligent spam filter (not recommended without reCAPTCHA): -->
+                <!-- <input type="hidden" name="_captcha" value="false"> -->
+
                 <label for="email-address-newsletter" class="sr-only">Email address</label>
                 <input id="email-address-newsletter" name="email" type="email" autocomplete="email" required
                        class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 rounded-md mb-3 sm:mb-0"
@@ -558,7 +572,22 @@
             
             <div class="grid lg:grid-cols-2 gap-8 sm:gap-12">
                 <div class="bg-gray-50 p-4 sm:p-6 rounded-lg shadow-md">
-                    <form action="#" method="POST">
+                    <!-- MODIFIED FORM: action points to FormSubmit, added hidden fields -->
+                    <form action="https://formsubmit.co/info@ourcommunity.agency" method="POST">
+                        <!-- IMPORTANT: Replace info@ourcommunity.agency with your actual email address if different. -->
+                        <!-- You MUST click an activation link sent to this email after the first submission via FormSubmit. -->
+                        
+                        <!-- Optional: Redirect to a custom 'Thank You' page after submission -->
+                        <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thank-you-contact.html"> --> 
+                        <!-- Create this page or remove this line to use FormSubmit's default thank you page. -->
+                        
+                        <!-- Optional: Custom subject for the email you receive -->
+                        <input type="hidden" name="_subject" value="New Contact Form Message - Our Community in Unity">
+                        
+                        <!-- FormSubmit includes basic spam protection. For advanced protection, see their docs on reCAPTCHA. -->
+                        <!-- To disable their intelligent spam filter (not recommended without reCAPTCHA): -->
+                        <!-- <input type="hidden" name="_captcha" value="false"> -->
+
                         <div class="mb-4 sm:mb-6">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                             <input type="text" id="name" name="name" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
@@ -649,6 +678,8 @@
               <div>
     <h3 class="text-lg font-semibold text-white mb-3">Stay Connected</h3>
     <p class="text-sm mb-3">Subscribe to our newsletter for updates.</p>
+    <!-- This form uses mailto: which will open the user's default email client. -->
+    <!-- It's a simple way but has limitations (e.g., user might not have an email client configured). -->
     <form action="mailto:info@ourcommunity.agency" method="post" enctype="text/plain" class="flex">
         <input 
             type="email" 
@@ -667,7 +698,7 @@
 </div>
             </div>
             <div class="border-t border-gray-700 pt-6 text-center text-sm">
-                <p>&copy; 2024 Our Community in Unity. All Rights Reserved.</p>
+                <p>© 2024 Our Community in Unity. All Rights Reserved.</p>
                 <p>Made with <i class="fas fa-heart text-indigo-500"></i> in Bonteheuwel.</p>
             </div>
         </div>
