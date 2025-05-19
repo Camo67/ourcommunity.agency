@@ -646,14 +646,25 @@
                         <li><a href="#" class="hover:text-indigo-400">Privacy Policy</a></li>
                     </ul>
                 </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-white mb-3">Stay Connected</h3>
-                    <p class="text-sm mb-3">Subscribe to our newsletter for updates (also available above).</p>
-                    <form class="flex">
-                        <input type="email" placeholder="info@ourcommunity.agency" class="w-full px-3 py-2 rounded-l-md text-gray-800 text-sm focus:outline-none">
-                        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md text-sm font-medium">Subscribe</button>
-                    </form>
-                </div>
+              <div>
+    <h3 class="text-lg font-semibold text-white mb-3">Stay Connected</h3>
+    <p class="text-sm mb-3">Subscribe to our newsletter for updates.</p>
+    <form action="mailto:info@ourcommunity.agency" method="post" enctype="text/plain" class="flex">
+        <input 
+            type="email" 
+            name="email"
+            placeholder="Enter your email address" 
+            class="w-full px-3 py-2 rounded-l-md text-gray-800 text-sm focus:outline-none" 
+            required
+        >
+        <button 
+            type="submit" 
+            class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md text-sm font-medium"
+        >
+            Subscribe
+        </button>
+    </form>
+</div>
             </div>
             <div class="border-t border-gray-700 pt-6 text-center text-sm">
                 <p>&copy; 2024 Our Community in Unity. All Rights Reserved.</p>
