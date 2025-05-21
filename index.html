@@ -5,9 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Community in Unity | Empowering Communities. Enabling Futures.</title>
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
     <style>
+        /* Import Poppins with font-display: swap for better loading experience */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
         
         body {
@@ -54,13 +65,12 @@
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Navigation -->
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center"> <!-- Center items vertically -->
+            <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
                     <a href="#" class="flex-shrink-0 flex items-center">
-                        <img class="h-10 w-auto mr-2 sm:h-12" src="logo.jpg" alt="Our Community in Unity Logo">
+                        <img class="h-10 w-auto mr-2 sm:h-12" src="logo.jpg" alt="Our Community in Unity Logo" loading="lazy" decoding="async">
                         <div>
                             <span class="text-indigo-600 font-bold text-base sm:text-lg md:text-xl leading-tight block">Our Community in Unity</span>
                             <span class="text-indigo-500 text-xs sm:text-sm italic leading-tight block">"each one teach one"</span>
@@ -75,7 +85,8 @@
                     <a href="#" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 lg:px-4 py-2 rounded-md text-sm font-medium">Donate Now</a>
                 </div>
                 <div class="flex md:hidden items-center">
-                    <button type="button" class="text-gray-500 hover:text-gray-700 focus:outline-none" id="mobile-menu-button">
+                    <button type="button" class="text-gray-500 hover:text-gray-700 focus:outline-none" id="mobile-menu-button" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
@@ -84,7 +95,6 @@
             </div>
         </div>
         
-        <!-- Mobile menu -->
         <div class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-gray-50">Home</a>
@@ -96,7 +106,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <div class="hero-gradient text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
             <div class="lg:flex lg:items-center lg:justify-between">
@@ -109,12 +118,11 @@
                     </div>
                 </div>
                 <div class="mt-10 sm:mt-12 lg:mt-0 lg:w-1/2">
-<img src="community.jpg" alt="Community Empowerment" class="rounded-lg shadow-xl w-full">                </div>
+                    <img src="community.jpg" alt="Community Empowerment" class="rounded-lg shadow-xl w-full" loading="lazy" decoding="async">                </div>
             </div>
         </div>
     </div>
 
-    <!-- Mission & Pillars -->
     <section id="mission" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -150,7 +158,6 @@
         </div>
     </section>
 
-    <!-- Key Offerings -->
     <section class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -230,7 +237,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -239,7 +245,6 @@
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 mt-12">
-                <!-- Business & Digital Services -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Business & Digital Services</h3>
                     <p class="mb-4 text-gray-600">Boost your online presence and efficiency with our tailored digital solutions.</p>
@@ -267,7 +272,6 @@
                     </ul>
                 </div>
                 
-                <!-- Community Empowerment Programs -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Community Empowerment Programs</h3>
                     <p class="mb-4 text-gray-600">Invest in your future with our practical and skills-focused training initiatives.</p>
@@ -291,7 +295,6 @@
                     </ul>
                 </div>
                 
-                <!-- Home & Security Solutions -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Home & Security Solutions</h3>
                     <p class="mb-4 text-gray-600">Enhance your living and working spaces with reliable and professional services.</p>
@@ -315,7 +318,6 @@
                     </ul>
                 </div>
                 
-                <!-- Event & AV Services -->
                 <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all">
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Event & AV Services</h3>
                     <p class="mb-4 text-gray-600">Make your next event a success with our comprehensive technical and creative support.</p>
@@ -344,14 +346,13 @@
                 <h3 class="text-2xl font-semibold text-gray-900 mb-4">Let's Discuss Your Project</h3>
                 <p class="text-gray-600 mb-6">Whether you need digital transformation or a fresh coat of paint, we're here to help.</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-md text-base font-medium">Get a Quote</a>
+                    <a href="#contact" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors inline-block">Get a Quote</a>
                     <a href="#contact" class="bg-white border border-indigo-600 text-indigo-600 hover:bg-indigo-50 px-6 py-3 rounded-md text-base font-medium">Schedule a Consultation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Us -->
     <section id="about" class="py-16 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -360,7 +361,7 @@
             
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-<img src="team.jpeg" alt="team" class="rounded-lg shadow-lg">                </div>
+                    <img src="team.jpeg" alt="team" class="rounded-lg shadow-lg" loading="lazy" decoding="async">                </div>
                 
                 <div>
                     <div class="mb-8">
@@ -435,29 +436,14 @@
         </div>
     </section>
 
-    <!-- Newsletter Signup Section -->
     <section id="newsletter-signup" class="py-12 sm:py-16 bg-indigo-50">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Stay Connected with Our Community</h2>
             <p class="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 max-w-2xl mx-auto">
                 Subscribe to our newsletter for the latest updates, success stories, event invitations, and opportunities to get involved.
             </p>
-            <!-- MODIFIED FORM: action points to FormSubmit, added hidden fields -->
             <form action="https://formsubmit.co/info@ourcommunity.agency" method="POST" class="max-w-lg mx-auto sm:flex sm:gap-x-4">
-                <!-- IMPORTANT: Replace info@ourcommunity.agency with your actual email for newsletter signups. -->
-                <!-- You MUST click an activation link sent to this email after the first submission via FormSubmit. -->
-
-                <!-- Optional: Redirect to a custom 'Thank You' page after subscription -->
-                <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thank-you-newsletter.html"> --> 
-                <!-- Create this page or remove this line to use FormSubmit's default thank you page. -->
-                
-                <!-- Optional: Custom subject for the email you receive for newsletter subscriptions -->
                 <input type="hidden" name="_subject" value="New Newsletter Subscription - Our Community in Unity">
-                
-                <!-- FormSubmit includes basic spam protection. For advanced protection, see their docs on reCAPTCHA. -->
-                <!-- To disable their intelligent spam filter (not recommended without reCAPTCHA): -->
-                <!-- <input type="hidden" name="_captcha" value="false"> -->
-
                 <label for="email-address-newsletter" class="sr-only">Email address</label>
                 <input id="email-address-newsletter" name="email" type="email" autocomplete="email" required
                        class="w-full px-5 py-3 border border-gray-300 shadow-sm placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 rounded-md mb-3 sm:mb-0"
@@ -470,22 +456,57 @@
         </div>
     </section>
 
-    <!-- Community Voices / Recommended Listening -->
     <section id="community-spotlight" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Community Voices</h2>
+            <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">Community Voices: Media & Podcasts</h2>
             <p class="text-lg sm:text-xl text-gray-700 mb-6 sm:mb-8 max-w-3xl mx-auto">
-                Tune in to insightful conversations and local perspectives. We recommend checking out:
+                Tune in to insightful conversations, watch community highlights, and explore local perspectives.
             </p>
-            <div class="space-y-4">
-                <a href="https://open.spotify.com/show/7cwfPZpCqL3L1T0gLsjkx0" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-md transition-colors">
-                    <i class="fab fa-spotify mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
-                    Listen to unspoken-truths by camo
-                </a>
-                <br> 
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Unspoken Truths - Misguided War</h3>
+                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+                        <iframe style="position:absolute; top:0; left:0; width:100%; height:100%;" 
+                                src="https://rumble.com/embed/v6s88p9/?pub=3wlcpn" 
+                                allowfullscreen="true" 
+                                class="w-full h-full rounded-md"
+                                loading="lazy"></iframe>
+                    </div>
+                    <p class="mt-4 text-gray-600">Watch the latest episode on Rumble.</p>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Unspoken Truths Podcast</h3>
+                    <div id="podcast-player-container">
+                        <h4 class="text-lg font-medium text-gray-800 mb-2" id="current-episode-title">Loading podcast...</h4>
+                        <audio controls id="podcast-audio-player" class="w-full mb-4">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="flex justify-center space-x-4 mb-4">
+                            <button id="podcast-prev" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50" disabled>
+                                <i class="fas fa-backward mr-1"></i> Prev
+                            </button>
+                            <button id="podcast-play-pause" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50" disabled>
+                                <i class="fas fa-play mr-1"></i> Play
+                            </button>
+                            <button id="podcast-next" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50" disabled>
+                                Next <i class="fas fa-forward ml-1"></i>
+                            </button>
+                        </div>
+                        <select id="episode-select" class="w-full p-2 border border-gray-300 rounded-md mb-4"></select>
+                    </div>
+                    <a href="https://anchor.fm/s/fff9d9cc/podcast/rss" target="_blank" rel="noopener noreferrer"
+                        class="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-md transition-colors mt-4">
+                        <i class="fas fa-rss mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
+                        View RSS Feed
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-4 mt-8">
                 <a href="https://unspoken-truthscommunityaffairs.blogspot.com/" target="_blank" rel="noopener noreferrer"
-                   class="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-md transition-colors">
+                    class="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-md transition-colors">
                     <i class="fas fa-blog mr-2 sm:mr-3 text-xl sm:text-2xl"></i>
                     Read the Unspoken Truths Blog
                 </a>
@@ -493,7 +514,6 @@
         </div>
     </section>
 
-    <!-- Empowering Local Businesses Through Strategic Partnerships -->
     <section id="sme-partnerships" class="py-16 bg-indigo-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
@@ -550,7 +570,6 @@
         </div>
     </section>
 
-    <!-- Call to Action -->
     <section class="py-12 sm:py-16 hero-gradient text-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Ready to Transform Your Community?</h2>
@@ -562,7 +581,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="py-12 sm:py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8 sm:mb-12">
@@ -572,22 +590,9 @@
             
             <div class="grid lg:grid-cols-2 gap-8 sm:gap-12">
                 <div class="bg-gray-50 p-4 sm:p-6 rounded-lg shadow-md">
-                    <!-- MODIFIED FORM: action points to FormSubmit, added hidden fields -->
                     <form action="https://formsubmit.co/info@ourcommunity.agency" method="POST">
-                        <!-- IMPORTANT: Replace info@ourcommunity.agency with your actual email address if different. -->
-                        <!-- You MUST click an activation link sent to this email after the first submission via FormSubmit. -->
-                        
-                        <!-- Optional: Redirect to a custom 'Thank You' page after submission -->
-                        <!-- <input type="hidden" name="_next" value="https://yourdomain.com/thank-you-contact.html"> --> 
-                        <!-- Create this page or remove this line to use FormSubmit's default thank you page. -->
-                        
-                        <!-- Optional: Custom subject for the email you receive -->
                         <input type="hidden" name="_subject" value="New Contact Form Message - Our Community in Unity">
                         
-                        <!-- FormSubmit includes basic spam protection. For advanced protection, see their docs on reCAPTCHA. -->
-                        <!-- To disable their intelligent spam filter (not recommended without reCAPTCHA): -->
-                        <!-- <input type="hidden" name="_captcha" value="false"> -->
-
                         <div class="mb-4 sm:mb-6">
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
                             <input type="text" id="name" name="name" class="w-full px-3 sm:px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
@@ -646,18 +651,17 @@
                     <div class="mt-6 sm:mt-8">
                         <h4 class="text-lg font-medium text-gray-800 mb-2">Follow Us</h4>
                        <div class="flex space-x-4">
-    <a href="https://www.facebook.com/communityinunityza/" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-facebook-f text-xl"></i></a>
-    <a href="https://x.com/ourcommunityag" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-twitter text-xl"></i></a>
-    <a href="https://www.instagram.com/ourcommunityza/" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-instagram text-xl"></i></a>
-    <a href="https://www.linkedin.com/company/our-community-in-unity/" class="text-gray-500 hover:text-indigo-600"><i class="fab fa-linkedin-in text-xl"></i></a>
-</div>
+                            <a href="https://www.facebook.com/communityinunityza/" class="text-gray-500 hover:text-indigo-600" aria-label="Facebook"><i class="fab fa-facebook-f text-xl"></i></a>
+                            <a href="https://x.com/ourcommunityag" class="text-gray-500 hover:text-indigo-600" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+                            <a href="https://www.instagram.com/ourcommunityza/" class="text-gray-500 hover:text-indigo-600" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+                            <a href="https://www.linkedin.com/company/our-community-in-unity/" class="text-gray-500 hover:text-indigo-600" aria-label="LinkedIn"><i class="fab fa-linkedin-in text-xl"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-8 sm:py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
@@ -675,27 +679,26 @@
                         <li><a href="#" class="hover:text-indigo-400">Privacy Policy</a></li>
                     </ul>
                 </div>
-              <div>
-    <h3 class="text-lg font-semibold text-white mb-3">Stay Connected</h3>
-    <p class="text-sm mb-3">Subscribe to our newsletter for updates.</p>
-    <!-- This form uses mailto: which will open the user's default email client. -->
-    <!-- It's a simple way but has limitations (e.g., user might not have an email client configured). -->
-    <form action="mailto:info@ourcommunity.agency" method="post" enctype="text/plain" class="flex">
-        <input 
-            type="email" 
-            name="email"
-            placeholder="Enter your email address" 
-            class="w-full px-3 py-2 rounded-l-md text-gray-800 text-sm focus:outline-none" 
-            required
-        >
-        <button 
-            type="submit" 
-            class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md text-sm font-medium"
-        >
-            Subscribe
-        </button>
-    </form>
-</div>
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-3">Stay Connected</h3>
+                    <p class="text-sm mb-3">Subscribe to our newsletter for updates.</p>
+                    <form action="https://formsubmit.co/info@ourcommunity.agency" method="POST" class="flex">
+                        <input type="hidden" name="_subject" value="New Footer Newsletter Subscription - Our Community in Unity">
+                        <input 
+                            type="email" 
+                            name="email"
+                            placeholder="Enter your email address" 
+                            class="w-full px-3 py-2 rounded-l-md text-gray-800 text-sm focus:outline-none" 
+                            required
+                        >
+                        <button 
+                            type="submit" 
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-2 rounded-r-md text-sm font-medium"
+                        >
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
             </div>
             <div class="border-t border-gray-700 pt-6 text-center text-sm">
                 <p>© 2024 Our Community in Unity. All Rights Reserved.</p>
@@ -704,12 +707,15 @@
         </div>
     </footer>
 
-    <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.2/web-animations.min.js" defer></script>
+    <script defer>
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = mobileMenu.querySelectorAll('a');
 
         mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.classList.toggle('hidden');
         });
 
@@ -717,8 +723,142 @@
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
             });
         });
+
+        // Podcast Player Logic
+        const podcastAudioPlayer = document.getElementById('podcast-audio-player');
+        const podcastPlayPauseButton = document.getElementById('podcast-play-pause');
+        const podcastPrevButton = document.getElementById('podcast-prev');
+        const podcastNextButton = document.getElementById('podcast-next');
+        const currentEpisodeTitle = document.getElementById('current-episode-title');
+        const episodeSelect = document.getElementById('episode-select');
+
+        const RSS_FEED_URL = 'https://anchor.fm/s/fff9d9cc/podcast/rss';
+        let episodes = [];
+        let currentEpisodeIndex = 0;
+
+        async function fetchPodcastFeed() {
+            try {
+                // Using a public CORS proxy. For production, consider a server-side proxy
+                // or verifying if Anchor.fm allows direct client-side fetching via CORS.
+                const proxyUrl = 'https://api.allorigins.win/get?url='; 
+                const response = await fetch(proxyUrl + encodeURIComponent(RSS_FEED_URL));
+                const data = await response.json();
+                
+                const parser = new DOMParser();
+                const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+                
+                const items = xmlDoc.querySelectorAll('item');
+                episodes = Array.from(items).map(item => {
+                    return {
+                        title: item.querySelector('title')?.textContent || 'Untitled Episode',
+                        audioUrl: item.querySelector('enclosure')?.getAttribute('url') || '',
+                        pubDate: item.querySelector('pubDate')?.textContent || ''
+                    };
+                }).filter(episode => episode.audioUrl); // Ensure only episodes with audio are listed
+
+                if (episodes.length > 0) {
+                    populateEpisodeSelect();
+                    loadEpisode(0); // Load the latest episode by default
+                    enableButtons();
+                } else {
+                    currentEpisodeTitle.textContent = 'No episodes found.';
+                }
+
+            } catch (error) {
+                console.error('Error fetching podcast feed:', error);
+                currentEpisodeTitle.textContent = 'Failed to load podcast.';
+            }
+        }
+
+        function populateEpisodeSelect() {
+            episodeSelect.innerHTML = '';
+            episodes.forEach((episode, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.textContent = `${episode.title} - ${new Date(episode.pubDate).toLocaleDateString()}`;
+                episodeSelect.appendChild(option);
+            });
+            episodeSelect.value = currentEpisodeIndex;
+        }
+
+        function loadEpisode(index) {
+            if (index >= 0 && index < episodes.length) {
+                currentEpisodeIndex = index;
+                const episode = episodes[currentEpisodeIndex];
+                podcastAudioPlayer.src = episode.audioUrl;
+                currentEpisodeTitle.textContent = episode.title;
+                episodeSelect.value = index;
+                podcastAudioPlayer.load();
+                updatePlayPauseButton();
+                updateNavigationButtons();
+            }
+        }
+
+        function playPauseToggle() {
+            if (podcastAudioPlayer.paused) {
+                podcastAudioPlayer.play();
+            } else {
+                podcastAudioPlayer.pause();
+            }
+        }
+
+        function updatePlayPauseButton() {
+            if (podcastAudioPlayer.paused) {
+                podcastPlayPauseButton.innerHTML = '<i class="fas fa-play mr-1"></i> Play';
+            } else {
+                podcastPlayPauseButton.innerHTML = '<i class="fas fa-pause mr-1"></i> Pause';
+            }
+        }
+
+        function updateNavigationButtons() {
+            podcastPrevButton.disabled = currentEpisodeIndex === 0;
+            podcastNextButton.disabled = currentEpisodeIndex === episodes.length - 1;
+        }
+
+        function enableButtons() {
+            podcastPlayPauseButton.disabled = false;
+            podcastPrevButton.disabled = false;
+            podcastNextButton.disabled = false;
+            episodeSelect.disabled = false;
+        }
+
+        podcastPlayPauseButton.addEventListener('click', playPauseToggle);
+
+        podcastAudioPlayer.addEventListener('play', updatePlayPauseButton);
+        podcastAudioPlayer.addEventListener('pause', updatePlayPauseButton);
+        podcastAudioPlayer.addEventListener('ended', () => {
+            if (currentEpisodeIndex < episodes.length - 1) {
+                loadEpisode(currentEpisodeIndex + 1);
+                podcastAudioPlayer.play();
+            } else {
+                updatePlayPauseButton();
+            }
+        });
+
+        podcastPrevButton.addEventListener('click', () => {
+            if (currentEpisodeIndex > 0) {
+                loadEpisode(currentEpisodeIndex - 1);
+                podcastAudioPlayer.play();
+            }
+        });
+
+        podcastNextButton.addEventListener('click', () => {
+            if (currentEpisodeIndex < episodes.length - 1) {
+                loadEpisode(currentEpisodeIndex + 1);
+                podcastAudioPlayer.play();
+            }
+        });
+
+        episodeSelect.addEventListener('change', (event) => {
+            loadEpisode(parseInt(event.target.value));
+            podcastAudioPlayer.play();
+        });
+
+        // Initialize podcast player
+        fetchPodcastFeed();
     </script>
 </body>
 </html>
