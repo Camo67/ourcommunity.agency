@@ -494,7 +494,7 @@
                                 Next <i class="fas fa-forward ml-1"></i>
                             </button>
                         </div>
-                        <select id="episode-select" class="w-full p-2 border border-gray-300 rounded-md mb-4"></select>
+                        <select id="episode-select" class="w-full p-2 border border-gray-300 rounded-md mb-4" disabled></select>
                     </div>
                     <a href="https://anchor.fm/s/fff9d9cc/podcast/rss" target="_blank" rel="noopener noreferrer"
                         class="inline-flex items-center justify-center bg-gray-700 hover:bg-gray-800 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-md text-base sm:text-lg font-medium shadow-md transition-colors mt-4">
@@ -739,49 +739,95 @@
         let episodes = [];
         let currentEpisodeIndex = 0;
 
+        // Function to disable podcast controls and show error message
+        function disablePodcastControls(message = 'Failed to load podcast episodes. Please try again later.') {
+            podcastAudioPlayer.src = ''; // Clear source
+            podcastPlayPauseButton.disabled = true;
+            podcastPrevButton.disabled = true;
+            podcastNextButton.disabled = true;
+            episodeSelect.disabled = true;
+            episodeSelect.innerHTML = '<option value="">No episodes available</option>';
+            currentEpisodeTitle.textContent = message;
+            console.error('Podcast Player Error: ', message);
+        }
+
         async function fetchPodcastFeed() {
             try {
-                // Using a public CORS proxy. For production, consider a server-side proxy
-                // or verifying if Anchor.fm allows direct client-side fetching via CORS.
+                currentEpisodeTitle.textContent = 'Loading podcast...'; // Update loading status
+                // Using a public CORS proxy.
+                // NOTE: Public proxies can be unreliable. For a robust solution, consider a server-side proxy.
                 const proxyUrl = 'https://api.allorigins.win/get?url='; 
+                console.log(`Attempting to fetch RSS from: ${proxyUrl}${encodeURIComponent(RSS_FEED_URL)}`);
+
                 const response = await fetch(proxyUrl + encodeURIComponent(RSS_FEED_URL));
-                const data = await response.json();
                 
+                if (!response.ok) {
+                    console.error(`Workspace response not OK: HTTP status ${response.status}`);
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                console.log('Raw data from proxy:', data); // Log raw data to inspect
+
+                // Check if data.contents is available and is a string
+                if (!data.contents || typeof data.contents !== 'string') {
+                    console.error('Received invalid or empty contents from CORS proxy.');
+                    throw new Error('Received invalid or empty contents from CORS proxy.');
+                }
+
                 const parser = new DOMParser();
                 const xmlDoc = parser.parseFromString(data.contents, "text/xml");
                 
+                // Check for XML parsing errors
+                const errorNode = xmlDoc.querySelector('parsererror');
+                if (errorNode) {
+                    console.error('Error parsing XML:', errorNode.textContent);
+                    throw new Error('Failed to parse RSS feed XML. Check XML structure.');
+                }
+
                 const items = xmlDoc.querySelectorAll('item');
                 episodes = Array.from(items).map(item => {
-                    return {
-                        title: item.querySelector('title')?.textContent || 'Untitled Episode',
-                        audioUrl: item.querySelector('enclosure')?.getAttribute('url') || '',
-                        pubDate: item.querySelector('pubDate')?.textContent || ''
-                    };
-                }).filter(episode => episode.audioUrl); // Ensure only episodes with audio are listed
+                    const title = item.querySelector('title')?.textContent || 'Untitled Episode';
+                    // The 'enclosure' tag holds the audio URL.
+                    // We need to ensure it has both 'url' and 'type' attributes, and type should be audio.
+                    const enclosure = item.querySelector('enclosure');
+                    const audioUrl = enclosure?.getAttribute('url') || '';
+                    const mimeType = enclosure?.getAttribute('type') || '';
+
+                    // Log details for debugging each episode
+                    // console.log(`Parsed Episode: "${title}", Audio URL: "${audioUrl}", MIME Type: "${mimeType}"`);
+                    
+                    // Filter for actual audio files (common types: audio/mpeg, audio/mp4)
+                    if (audioUrl && mimeType.startsWith('audio/')) {
+                        return { title, audioUrl, pubDate: item.querySelector('pubDate')?.textContent || '' };
+                    }
+                    return null; // Return null for invalid entries
+                }).filter(episode => episode !== null); // Filter out null entries
 
                 if (episodes.length > 0) {
+                    console.log(`Found ${episodes.length} valid podcast episodes.`);
                     populateEpisodeSelect();
                     loadEpisode(0); // Load the latest episode by default
                     enableButtons();
                 } else {
-                    currentEpisodeTitle.textContent = 'No episodes found.';
+                    disablePodcastControls('No valid podcast episodes found in the feed. The feed might be empty or structured differently.');
                 }
 
             } catch (error) {
-                console.error('Error fetching podcast feed:', error);
-                currentEpisodeTitle.textContent = 'Failed to load podcast.';
+                console.error('Error in fetchPodcastFeed:', error);
+                disablePodcastControls(`Error loading podcast: ${error.message}.`);
             }
         }
 
         function populateEpisodeSelect() {
-            episodeSelect.innerHTML = '';
+            episodeSelect.innerHTML = ''; // Clear previous options
             episodes.forEach((episode, index) => {
                 const option = document.createElement('option');
                 option.value = index;
                 option.textContent = `${episode.title} - ${new Date(episode.pubDate).toLocaleDateString()}`;
                 episodeSelect.appendChild(option);
             });
-            episodeSelect.value = currentEpisodeIndex;
+            episodeSelect.value = currentEpisodeIndex; // Set default selection
         }
 
         function loadEpisode(index) {
@@ -790,8 +836,8 @@
                 const episode = episodes[currentEpisodeIndex];
                 podcastAudioPlayer.src = episode.audioUrl;
                 currentEpisodeTitle.textContent = episode.title;
-                episodeSelect.value = index;
-                podcastAudioPlayer.load();
+                episodeSelect.value = index; // Update select dropdown
+                podcastAudioPlayer.load(); // Load the new audio source
                 updatePlayPauseButton();
                 updateNavigationButtons();
             }
@@ -808,8 +854,10 @@
         function updatePlayPauseButton() {
             if (podcastAudioPlayer.paused) {
                 podcastPlayPauseButton.innerHTML = '<i class="fas fa-play mr-1"></i> Play';
+                podcastPlayPauseButton.setAttribute('aria-label', 'Play episode');
             } else {
                 podcastPlayPauseButton.innerHTML = '<i class="fas fa-pause mr-1"></i> Pause';
+                podcastPlayPauseButton.setAttribute('aria-label', 'Pause episode');
             }
         }
 
@@ -820,11 +868,13 @@
 
         function enableButtons() {
             podcastPlayPauseButton.disabled = false;
-            podcastPrevButton.disabled = false;
-            podcastNextButton.disabled = false;
+            // Only enable prev/next if there are more than one episode
+            podcastPrevButton.disabled = episodes.length <= 1;
+            podcastNextButton.disabled = episodes.length <= 1;
             episodeSelect.disabled = false;
         }
 
+        // Event Listeners for podcast player controls
         podcastPlayPauseButton.addEventListener('click', playPauseToggle);
 
         podcastAudioPlayer.addEventListener('play', updatePlayPauseButton);
@@ -832,9 +882,9 @@
         podcastAudioPlayer.addEventListener('ended', () => {
             if (currentEpisodeIndex < episodes.length - 1) {
                 loadEpisode(currentEpisodeIndex + 1);
-                podcastAudioPlayer.play();
+                podcastAudioPlayer.play(); // Auto-play next episode
             } else {
-                updatePlayPauseButton();
+                updatePlayPauseButton(); // Show 'Play' button if no more episodes
             }
         });
 
@@ -854,10 +904,10 @@
 
         episodeSelect.addEventListener('change', (event) => {
             loadEpisode(parseInt(event.target.value));
-            podcastAudioPlayer.play();
+            podcastAudioPlayer.play(); // Auto-play when a new episode is selected
         });
 
-        // Initialize podcast player
+        // Initial call to fetch and set up the podcast player
         fetchPodcastFeed();
     </script>
 </body>
