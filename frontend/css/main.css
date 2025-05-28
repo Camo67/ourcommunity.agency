@@ -1,0 +1,300 @@
+/* General Body & Typography */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4 {
+    color: #007bff; /* Primary brand color */
+    margin-bottom: 0.8em;
+}
+
+h1 { font-size: 2.5em; text-align: center; margin-bottom: 0.5em; }
+h2 { font-size: 2em; text-align: center; margin-bottom: 1em; }
+h3 { font-size: 1.7em; }
+h4 { font-size: 1.3em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 1em;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.9em;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #333;
+    color: white;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    margin: 0;
+    color: white;
+}
+
+header .motto {
+    font-style: italic;
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: #bbb;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+    display: flex; /* For horizontal navigation */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #a0c9ff;
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    background: url('../images/hero-bg.jpg') no-repeat center center/cover;
+    color: white;
+    text-align: center;
+    padding: 100px 20px;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: white; /* Ensure text is white over dark overlay */
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #eee;
+}
+
+/* Sections */
+section {
+    padding: 60px 0;
+    border-bottom: 1px solid #eee;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+/* Flex Container for grid-like layouts */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Space between flex items */
+    justify-content: center; /* Center items in the container */
+    margin-top: 30px;
+}
+
+.flex-item {
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex: 1 1 calc(33.33% - 30px); /* Default to 3 items per row on large screens */
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+    min-width: 280px; /* Minimum width for flex items before wrapping */
+    text-align: left;
+}
+
+.program-list ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.program-list ul li {
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #555;
+}
+
+.program-list ul li ul {
+    list-style: circle;
+    font-weight: normal;
+    margin-top: 5px;
+    margin-left: 20px;
+}
+
+/* Leader Bio */
+.leader-bio {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    background-color: white;
+    padding: 30px;
+    margin-top: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.leader-bio img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+    margin-right: 30px;
+    margin-bottom: 20px; /* For mobile stacking */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.leader-bio h3 {
+    margin-top: 0;
+    flex-basis: calc(100% - 180px); /* Adjust width to fit image */
+    font-size: 1.6em;
+}
+
+.leader-bio p {
+    flex-basis: 100%; /* Make paragraphs take full width below image */
+    margin-bottom: 1em;
+}
+
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+
+footer p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments for general main.css */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.5em; }
+
+    .hero {
+        padding: 80px 15px;
+        min-height: 400px;
+    }
+
+    .hero-content h2 {
+        font-size: 2.2em;
+    }
+
+    header nav ul {
+        flex-direction: column; /* Stack navigation items vertically */
+        align-items: center;
+    }
+
+    header nav ul li {
+        margin: 10px 0;
+    }
+
+    .flex-item {
+        flex: 1 1 100%; /* Stack flex items on small screens */
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .leader-bio {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .leader-bio img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .leader-bio h3 {
+        flex-basis: 100%;
+    }
+}
