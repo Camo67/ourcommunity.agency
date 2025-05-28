@@ -41,3 +41,4 @@ The entire project is structured to ensure clarity and maintainability, with dis
 ## 2. Project Structure
 
 The project follows a monorepo-like structure, organizing frontend, backend, and shared components in distinct directories.
+docs: Add comprehensive README.md with full deployment guide
