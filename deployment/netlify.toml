@@ -1,0 +1,28 @@
+# Netlify configuration file
+
+[build]
+  # Directory that contains the deploy-ready HTML files and assets
+  publish = "frontend/public"
+  # The command to run before deploy (e.g., a build script)
+  command = "echo 'No frontend build command needed for static HTML/CSS/JS'"
+
+# Basic redirects/rewrites
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers (optional)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer-when-downgrade"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Functions directory (if you use Netlify Functions)
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
