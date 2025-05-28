@@ -202,3 +202,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initial check when the page loads
     checkUser();
 });
+feat: Add main.js with Supabase auth and classroom logic
