@@ -1,0 +1,21 @@
+# This file contains environment variables for local development.
+# It should NOT be committed to version control.
+# A .env.example file is provided for structure.
+
+# Supabase Configuration
+# You can find these in your Supabase Project Settings -> API
+# The URL is public, but placed here for consistency.
+SUPABASE_URL=https://ycrmkofqhtlkexfbpljy.supabase.co
+
+# This is your PUBLIC (anon) key. While it's in public frontend code,
+# it's good practice to manage it via .env for local development consistency.
+SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY_HERE
+
+# This is your SECRET service_role key. NEVER expose this in frontend code!
+# It's only used by your backend or secure server-side processes.
+SUPABASE_SERVICE_ROLE_KEY=YOUR_SUPABASE_SERVICE_ROLE_KEY_HERE
+
+# Backend Configuration (if you build out the backend/ directory)
+BACKEND_PORT=4000
+
+# Add any other local environment variables here as needed
