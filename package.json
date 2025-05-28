@@ -1,0 +1,20 @@
+{
+  "name": "ourcommunity-agency",
+  "version": "1.0.0",
+  "description": "Root package for Our Community in Unity full-stack platform",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend:dev": "cd frontend && http-server public -p 5000",
+    "backend:dev": "cd backend && npm run dev",
+    "start:dev": "npm-run-all --parallel frontend:dev backend:dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "npm-run-all": "^4.1.5"
+  }
+}
