@@ -1,12 +1,83 @@
-# This file is a template for .env
-# Create a .env file based on this, and fill in actual sensitive values.
-# .env should NOT be committed to version control.
+# Gitignore rules for the entire project
 
-# Supabase Configuration
-# You can find these in your Supabase Project Settings -> API
-SUPABASE_URL=https://ycrmkofqhtlkexfbpljy.supabase.co
-SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY_HERE
-SUPABASE_SERVICE_ROLE_KEY=YOUR_SUPABASE_SERVICE_ROLE_KEY_HERE # Secret key, only for backend/server-side use!
+# Node.js
+node_modules/
+*.log
+npm-debug.log*
+.npm/
 
-# Backend Configuration
-BACKEND_PORT=4000
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+build/
+coverage/
+
+# IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Firebase related
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# Render related
+.render/
+
+# Netlify related
+.netlify/
+
+# Docker related
+.docker/
+*.dockerignore# Gitignore rules for the entire project
+
+# Node.js
+node_modules/
+*.log
+npm-debug.log*
+.npm/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+dist/
+build/
+coverage/
+
+# IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Firebase related
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# Render related
+.render/
+
+# Netlify related
+.netlify/
+
+# Docker related
+.docker/
+*.dockerignore
