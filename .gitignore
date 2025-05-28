@@ -1,0 +1,12 @@
+# This file is a template for .env
+# Create a .env file based on this, and fill in actual sensitive values.
+# .env should NOT be committed to version control.
+
+# Supabase Configuration
+# You can find these in your Supabase Project Settings -> API
+SUPABASE_URL=https://ycrmkofqhtlkexfbpljy.supabase.co
+SUPABASE_ANON_KEY=YOUR_SUPABASE_ANON_KEY_HERE
+SUPABASE_SERVICE_ROLE_KEY=YOUR_SUPABASE_SERVICE_ROLE_KEY_HERE # Secret key, only for backend/server-side use!
+
+# Backend Configuration
+BACKEND_PORT=4000
