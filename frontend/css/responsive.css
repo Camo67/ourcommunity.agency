@@ -1,0 +1,83 @@
+/* Basic responsive styles for smaller screens (e.g., mobile) */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Reduce padding on smaller screens */
+    }
+
+    h1 { font-size: 2em; }
+    h2 { font-size: 1.8em; }
+    h3 { font-size: 1.5em; }
+
+    /* Adjust header navigation for mobile */
+    header nav ul {
+        flex-direction: column; /* Stack navigation items vertically */
+        align-items: center; /* Center them */
+        margin-top: 10px;
+    }
+
+    header nav ul li {
+        margin: 8px 0; /* Add vertical spacing */
+    }
+
+    /* Adjust hero section padding */
+    .hero {
+        padding: 60px 15px;
+        min-height: 350px;
+    }
+
+    .hero-content h2 {
+        font-size: 2em; /* Smaller hero heading */
+    }
+
+    .hero-content p {
+        font-size: 1em; /* Smaller hero paragraph */
+    }
+
+    /* Stack flex items on small screens */
+    .flex-container {
+        flex-direction: column;
+        gap: 20px; /* Adjust gap for stacked items */
+    }
+
+    .flex-item {
+        flex: 1 1 100%; /* Each item takes full width */
+        max-width: 100%;
+        margin-bottom: 0; /* Remove individual margin-bottom if using gap */
+    }
+
+    /* Adjust leader bio for stacking */
+    .leader-bio {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .leader-bio img {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .leader-bio h3 {
+        flex-basis: 100%;
+    }
+
+    /* Adjust contact form inputs for full width */
+    #contact-page form input[type="text"],
+    #contact-page form input[type="email"],
+    #contact-page form textarea {
+        width: 100%;
+        box-sizing: border-box; /* Ensure padding/border are included in width */
+    }
+}
+
+/* Specific adjustments for tablets (e.g., between 768px and 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        padding: 30px;
+    }
+
+    .flex-item {
+        flex: 1 1 calc(50% - 20px); /* 2 items per row */
+        max-width: calc(50% - 20px);
+    }
+}
