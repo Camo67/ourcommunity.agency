@@ -45,3 +45,4 @@ docs: Add comprehensive README.md with full deployment guide [Deployment trigger
 [Final Cloudflare Pages re-sync attempt post domain removal]
 fix: Final trigger after Pages project and custom domain removal
 fix: New trigger after addressing wrangler deploy error
+feat: Update wrangler.jsonc with correct project name
