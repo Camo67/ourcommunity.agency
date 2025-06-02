@@ -44,3 +44,4 @@ The project follows a monorepo-like structure, organizing frontend, backend, and
 docs: Add comprehensive README.md with full deployment guide [Deployment trigger: Minor README update to re-sync with Cloudflare Pages]
 [Final Cloudflare Pages re-sync attempt post domain removal]
 fix: Final trigger after Pages project and custom domain removal
+fix: New trigger after addressing wrangler deploy error
