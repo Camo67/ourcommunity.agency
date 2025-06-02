@@ -30,6 +30,7 @@
             line-height: 1.6;
             color: var(--text-dark);
             background-color: var(--background-light);
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
         }
 
         .container {
@@ -267,18 +268,11 @@
             display: block;
             text-align: center;
         }
-        .flex-item.mission h4::before,
-        .flex-item.vision h4::before,
-        .flex-item.values h4::before {
-            content: '\f02d'; /* book */
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            font-size: 1.2em;
-            color: var(--primary-blue);
-            margin-right: 10px;
-        }
-        .flex-item.vision h4::before { content: '\f06e'; /* eye */ }
-        .flex-item.values h4::before { content: '\f500'; /* handshake */ }
+        /* Specific icons for About Us (Mission, Vision, Values) */
+        .flex-item.mission h4::before { content: '\f02d'; /* book */ font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 1.2em; color: var(--primary-blue); margin-right: 10px; }
+        .flex-item.vision h4::before { content: '\f06e'; /* eye */ font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 1.2em; color: var(--primary-blue); margin-right: 10px; }
+        .flex-item.values h4::before { content: '\f500'; /* handshake */ font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 1.2em; color: var(--primary-blue); margin-right: 10px; }
+
 
         /* Program List specific adjustments */
         .program-list .flex-item ul li::before {
@@ -338,45 +332,6 @@
         .leader-bio p {
             flex-basis: 100%;
             margin-bottom: 1em;
-        }
-
-        /* Podcast Section */
-        #podcast-episodes {
-            background-color: var(--light-blue); /* Light blue background */
-            padding: 25px;
-            border-radius: 8px;
-            margin-top: 25px;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
-        }
-        #podcast-episodes h4 {
-            color: var(--dark-blue);
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }
-        #podcast-episodes ul {
-            list-style: none;
-            padding: 0;
-        }
-        #podcast-episodes ul li {
-            background-color: var(--background-white);
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px var(--shadow-light);
-            border-left: 5px solid var(--primary-blue); /* Accent border */
-            transition: transform 0.2s ease;
-        }
-        #podcast-episodes ul li:hover {
-            transform: translateX(5px);
-        }
-        #podcast-episodes ul li strong {
-            display: block;
-            margin-bottom: 5px;
-        }
-        #podcast-episodes ul li small {
-            color: var(--text-light);
-            font-size: 0.85em;
         }
 
         /* Get Involved Section */
@@ -603,7 +558,7 @@
         </div>
 
         <div class="leader-bio">
-            <img src="images/logo.jpg" alt="Our Community in Unity Logo"> <h3>Our Founder's Journey: A Testament to "Each One Teach One"</h3>
+            <img src="images/team/hero.jpg" alt="Cameron De Vries - Founder of Our Community in Unity"> <h3>Our Founder's Journey: A Testament to "Each One Teach One"</h3>
             <p><strong>Cameron De Vries</strong>, Founder and Director of Our Community in Unity, embodies the very spirit of our motto, 'Each One Teach One.' Despite leaving formal schooling in Grade 9, Cameron's insatiable drive for knowledge and growth led to a remarkable journey of self-education and hands-on mastery. His diverse background includes sound engineering, event livestreaming, construction, security, and business development.</p>
             <p>His professional history, from entrepreneurial ventures in his late teens to excelling in technical and creative fields like the printing industry and film, demonstrates a powerful commitment to continuous learning and adaptation.</p>
             <p>Having personally navigated paths less traveled, Cameron understands the challenges and immense potential within our community. His journey is a living example that skills, determination, and the willingness to learn and share knowledge can create profound opportunities for growth, truly living the 'Each One Teach One' philosophy.</p>
@@ -746,5 +701,947 @@
             </div>
 
             <form>
-                <p><label for="name">Name:</
-                    
+                <p><label for="name">Name:</label><br><input type="text" id="name" name="name" required></p>
+                <p><label for="email">Email:</label><br><input type="email" id="email" name="email" required></p>
+                <p><label for="message">Message:</label><br><textarea id="message" name="message" rows="5" required></textarea></p>
+                <p><button type="submit" class="btn">Send Message</button></p>
+            </form>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Our Community in Unity. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script>
+            // Supabase client initialization
+            const SUPABASE_URL = 'https://ycrmkofqhtlkexfbpljy.supabase.co'; // Your actual Supabase Project URL
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inljcm1rb2ZxaHRsa2V4ZmJwbGp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMDQyMTgsImV4cCI6MjA2Mzg4MDIxOH0.RttjxZ_VSoZbeFWmI6nD0mSQb40ozvoPT6u7eRd9Tpo'; // Your actual Supabase public (anon) key
+
+            const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            // Get DOM elements for authentication and classroom (these will be hidden with CSS for "Coming Soon")
+            const authUi = document.getElementById('auth-ui');
+            const signupForm = document.getElementById('signup-form');
+            const loginForm = document.getElementById('login-form');
+            const logoutButton = document.getElementById('logout-button');
+            const authStatus = document.getElementById('auth-status');
+            const classroomContent = document.getElementById('classroom-content');
+            const resourcesContainer = document.getElementById('resources-container');
+            const resetPasswordLink = document.getElementById('reset-password-link');
+
+            // --- Authentication Functions (will not be called directly if classroom is "Coming Soon") ---
+            // These functions are kept for future use if classroom is enabled later
+            async function checkUser() {
+                const { data: { user }, error } = await supabase.auth.getUser();
+                if (error) { console.error('Error getting user:', error); return; }
+                // In "Coming Soon" mode, we don't display auth UI or fetch resources dynamically
+            }
+            if (signupForm) {
+                signupForm.addEventListener('submit', async (event) => { event.preventDefault(); /* Placeholder */ });
+            }
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (event) => { event.preventDefault(); /* Placeholder */ });
+            }
+            if (logoutButton) {
+                logoutButton.addEventListener('click', async () => { /* Placeholder */ });
+            }
+            if (resetPasswordLink) {
+                resetPasswordLink.addEventListener('click', async (event) => { /* Placeholder */ });
+            }
+            async function fetchClassroomResources() { /* Placeholder */ }
+
+            // Initial check when the page loads (for contact form and podcast)
+            document.addEventListener('DOMContentLoaded', function() {
+                const contactForm = document.querySelector('#contact form');
+                const podcastRSSFeedUrl = 'https://anchor.fm/s/fff9d9cc/podcast/rss'; // Your podcast RSS feed URL
+                const episodeList = document.getElementById('episode-list');
+
+
+                // Using the SAME Supabase client as for authentication and classroom
+                const supabaseContact = supabase; 
+
+                if (contactForm) {
+                    contactForm.addEventListener('submit', async function(event) {
+                        event.preventDefault(); // Prevent default form submission
+
+                        const submitButton = contactForm.querySelector('button[type="submit"]');
+                        submitButton.disabled = true; // Disable button to prevent multiple submissions
+                        submitButton.textContent = 'Sending...'; // Change button text
+
+                        const formData = {
+                            name: contactForm.name.value,
+                            email: contactForm.email.value,
+                            message: contactForm.message.value
+                        };
+
+                        try {
+                            // 1. Insert data into Supabase database table (contact_submissions)
+                            const { data, error } = await supabaseContact
+                                .from('contact_submissions') // Your table name
+                                .insert([formData]);
+
+                            if (error) {
+                                console.error('Supabase insert error:', error);
+                                alert('Error submitting message: ' + error.message);
+                            } else {
+                                console.log('Submission data saved to DB:', data);
+
+                                // 2. Invoke Supabase Edge Function to send email notification
+                                const { data: edgeFunctionData, error: edgeFunctionError } = await supabaseContact.functions.invoke('send-contact-email', {
+                                    body: formData, // Pass the form data to the function
+                                    headers: { 'Content-Type': 'application/json' },
+                                });
+
+                                if (edgeFunctionError) {
+                                    console.error('Edge Function invocation error:', edgeFunctionError);
+                                    // Alert that message was saved, but email notification failed
+                                    alert('Your message has been sent to our records, but we could not send an email notification. We will still get back to you!');
+                                } else {
+                                    console.log('Edge Function response:', edgeFunctionData);
+                                    alert('Your message has been sent successfully!');
+                                }
+
+                                contactForm.reset(); // Clear the form
+                            }
+                        } catch (error) {
+                            console.error('Network or unexpected error:', error);
+                            alert('An unexpected error occurred. Please try again.');
+                        } finally {
+                            submitButton.disabled = false; // Re-enable button
+                            submitButton.textContent = 'Send Message'; // Reset button text
+                        }
+                    });
+                }
+
+                // Podcast RSS Feed - Now a simple external link, no dynamic loading
+                // The JS for dynamic loading is removed from this block for simplicity
+            });
+        </script>
+        </body>
+    </html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Community in Unity - Empowering Futures, Together</title>
+    <meta name="description" content="Our Community in Unity builds a united and resilient community in Cape Town through empowerment, education, and shared resources, guided by 'Each One Teach One.'">
+    <link rel="icon" type="image/png" href="favicon.png"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Color Variables */
+        :root {
+            --primary-blue: #007bff;
+            --dark-blue: #0056b3;
+            --light-blue: #e0f2ff;
+            --text-dark: #333;
+            --text-light: #555;
+            --background-light: #f8f9fa;
+            --background-white: #ffffff;
+            --border-light: #dee2e6;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+            --shadow-medium: rgba(0, 0, 0, 0.2);
+        }
+
+        /* General Body & Typography */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            scroll-behavior: smooth; /* Smooth scrolling for anchor links */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px; /* Increased vertical padding */
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.8em;
+            font-weight: 700; /* Bolder headings */
+        }
+
+        h1 { font-size: 3em; text-align: center; color: var(--background-white); margin-bottom: 0.5em; } /* White for header */
+        h2 { font-size: 2.5em; text-align: center; margin-bottom: 1em; }
+        h3 { font-size: 1.8em; }
+        h4 { font-size: 1.4em; }
+
+        p {
+            margin-bottom: 1em;
+            color: var(--text-light);
+        }
+
+        a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark-blue);
+            text-decoration: underline;
+        }
+
+        ul {
+            list-style: none; /* Removed default bullets */
+            padding: 0;
+            margin-left: 0;
+            margin-bottom: 1em;
+        }
+        ul li {
+            padding-left: 1.5em; /* Space for custom bullet */
+            position: relative;
+            margin-bottom: 0.5em;
+        }
+        ul li::before {
+            content: "\f00c"; /* Font Awesome check-mark icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--primary-blue);
+            position: absolute;
+            left: 0;
+            top: 0.1em;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px); /* Slight lift on hover */
+            text-decoration: none;
+        }
+
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-blue); /* Solid blue header */
+            color: var(--background-white);
+            padding: 20px 0; /* Increased padding */
+            text-align: center;
+            box-shadow: 0 4px 10px var(--shadow-medium);
+        }
+
+        header h1 {
+            margin: 0;
+            color: var(--background-white);
+        }
+
+        header .motto {
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 1em;
+            color: var(--light-blue);
+            margin-bottom: 15px;
+        }
+
+        header nav ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        header nav ul li {
+            margin: 0 18px; /* More spacing */
+        }
+
+        header nav ul li a {
+            color: var(--background-white);
+            font-weight: bold;
+            padding: 8px 12px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+            border-radius: 4px;
+        }
+
+        header nav ul li a:hover {
+            color: var(--primary-blue);
+            background-color: var(--background-white);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('images/hero-bg.jpg') no-repeat center center/cover; /* Image path relative to index.html */
+            color: white;
+            text-align: center;
+            padding: 120px 20px; /* More padding */
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-content h2 {
+            font-size: 3.5em; /* Larger heading */
+            margin-bottom: 25px;
+            color: white;
+            text-shadow: 2px 2px 4px var(--shadow-medium); /* Text shadow for impact */
+        }
+
+        .hero-content p {
+            font-size: 1.4em; /* Larger paragraph */
+            margin-bottom: 40px;
+            color: #f0f8ff; /* Off-white for contrast */
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0; /* Increased padding */
+            border-bottom: 1px solid var(--border-light);
+            background-color: var(--background-white); /* White background for sections */
+        }
+
+        section:nth-child(even) {
+            background-color: var(--background-light); /* Light grey for alternating sections */
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        section h2 {
+            margin-bottom: 1.5em;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        section h2::after { /* Underline effect */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
+        }
+
+        /* Flex Container for grid-like layouts */
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .flex-item {
+            background-color: var(--background-white);
+            padding: 30px; /* Increased padding */
+            border-radius: 10px; /* More rounded corners */
+            box-shadow: 0 5px 15px var(--shadow-light); /* More prominent shadow */
+            flex: 1 1 calc(33.33% - 40px); /* Adjust for gap */
+            box-sizing: border-box;
+            min-width: 290px; /* Slightly larger min-width */
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .flex-item:hover {
+            transform: translateY(-5px); /* Lift on hover */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .flex-item h3, .flex-item h4 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        /* Icons in flex items (services, get involved) */
+        .flex-item .icon {
+            font-size: 2.5em; /* Larger icons */
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            display: block;
+            text-align: center;
+        }
+        /* Specific icons for About Us (Mission, Vision, Values) */
+        .flex-item.mission h4::before { content: '\f02d'; /* book */ font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 1.2em; color: var(--primary-blue); margin-right: 10px; }
+        .flex-item.vision h4::before { content: '\f06e'; /* eye */ font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 1.2em; color: var(--primary-blue); margin-right: 10px; }
+        .flex-item.values h4::before { content: '\f500'; /* handshake */ font-family: "Font Awesome 5 Free"; font-weight: 900; font-size: 1.2em; color: var(--primary-blue); margin-right: 10px; }
+
+
+        /* Program List specific adjustments */
+        .program-list .flex-item ul li::before {
+            content: "\f00c"; /* Check mark for program lists */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--primary-blue);
+            position: absolute;
+            left: 0;
+            top: 0.1em;
+        }
+        .program-list ul li ul {
+            list-style: none; /* No default bullet for sub-lists */
+            margin-left: 1.5em; /* Indent sub-list */
+        }
+        .program-list ul li ul li::before {
+            content: "\f111"; /* Small circle for sub-lists */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            font-size: 0.6em;
+            color: var(--dark-blue);
+            position: absolute;
+            left: 0;
+            top: 0.5em;
+        }
+
+
+        /* Leader Bio */
+        .leader-bio {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            background-color: var(--background-white);
+            padding: 40px; /* More padding */
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-light);
+        }
+
+        .leader-bio img {
+            max-width: 180px; /* Larger image */
+            height: auto;
+            border-radius: 50%;
+            margin-right: 40px; /* More spacing */
+            margin-bottom: 20px;
+            border: 5px solid var(--light-blue); /* Light blue border */
+            object-fit: cover; /* Ensures image covers area without distortion */
+        }
+
+        .leader-bio h3 {
+            margin-top: 0;
+            flex-basis: calc(100% - 220px); /* Adjust width to fit image */
+            font-size: 1.8em;
+            color: var(--dark-blue);
+            text-align: left; /* Align text left */
+        }
+        .leader-bio p {
+            flex-basis: 100%;
+            margin-bottom: 1em;
+        }
+
+        /* Get Involved Section */
+        #get-involved .flex-item {
+            text-align: center;
+        }
+        #get-involved .flex-item .icon {
+            font-size: 3.5em; /* Larger icons for impact */
+            margin-bottom: 20px;
+        }
+
+        /* Contact Form Styling */
+        #contact form {
+            background-color: var(--background-white);
+            padding: 40px; /* More padding */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            max-width: 600px; /* Constrain width */
+            margin: 40px auto; /* Center the form */
+            text-align: left; /* Align text within form */
+        }
+
+        #contact form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        #contact form input[type="text"],
+        #contact form input[type="email"],
+        #contact form textarea {
+            width: calc(100% - 24px); /* Account for padding and border */
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-light);
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #contact form input[type="text"]:focus,
+        #contact form input[type="email"]:focus,
+        #contact form textarea:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px var(--light-blue);
+            outline: none;
+        }
+
+        #contact form textarea {
+            resize: vertical; /* Allow vertical resizing */
+            min-height: 100px;
+        }
+
+        #contact form .btn {
+            width: 100%; /* Full width button */
+            padding: 15px; /* Larger button */
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        /* Auth Forms (Signup/Login) - Centralized and Prominent */
+        #auth-ui {
+            background-color: var(--background-white);
+            padding: 40px; /* More padding */
+            border-radius: 10px;
+            box-shadow: 0 5px 20px var(--shadow-medium); /* More prominent shadow */
+            max-width: 450px; /* Wider than contact form, for emphasis */
+            margin: 50px auto; /* Center and add more space */
+            text-align: left;
+            border-top: 5px solid var(--primary-blue); /* Accent border */
+        }
+
+        #auth-ui h3 {
+            text-align: center;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        #auth-ui label {
+            display: block;
+            text-align: left;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        #auth-ui input[type="email"],
+        #auth-ui input[type="password"] {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-light);
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        #auth-ui input[type="email"]:focus,
+        #auth-ui input[type="password"]:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px var(--light-blue);
+            outline: none;
+        }
+
+        #auth-ui button.btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            margin-top: 15px;
+        }
+
+        #auth-ui #reset-password-link {
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
+
+        #auth-ui #auth-status {
+            text-align: center;
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 5px;
+            color: var(--text-dark);
+            background-color: var(--light-blue);
+            border: 1px solid var(--primary-blue);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) { /* Adjust for medium screens */
+            .container {
+                padding: 20px 15px;
+            }
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            .hero-content h2 { font-size: 3em; }
+            .hero-content p { font-size: 1.2em; }
+            section { padding: 60px 0; }
+            .flex-item {
+                flex: 1 1 calc(50% - 20px); /* 2 items per row */
+                max-width: calc(50% - 20px);
+            }
+            .leader-bio { flex-direction: column; text-align: center; }
+            .leader-bio img { margin-right: 0; margin-bottom: 25px; }
+            .leader-bio h3 { flex-basis: 100%; text-align: center; }
+            #contact form, #auth-ui {
+                max-width: 90%; /* Wider on smaller screens */
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) { /* Adjust for mobile screens */
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            h3 { font-size: 1.5em; }
+            .hero { padding: 80px 15px; min-height: 450px; }
+            .hero-content h2 { font-size: 2.5em; }
+            .hero-content p { font-size: 1em; }
+            header nav ul { flex-direction: column; align-items: center; }
+            header nav ul li { margin: 8px 0; }
+            .flex-item { flex: 1 1 100%; max-width: 100%; }
+            .leader-bio img { max-width: 150px; }
+            #contact form input[type="text"],
+            #contact form input[type="email"],
+            #contact form textarea,
+            #auth-ui input[type="email"],
+            #auth-ui input[type="password"] {
+                width: calc(100% - 20px); /* Adjust for padding within inputs */
+            }
+        }
+    </style>
+    </head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Our Community in Unity</h1>
+            <p class="motto">Each One Teach One</p>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#what-we-do">What We Do</a></li>
+                    <li><a href="#classroom">Classroom</a></li>
+                    <li><a href="#get-involved">Get Involved</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2>Empowering Futures, Transforming Lives in Cape Town</h2>
+            <p>Building a united and resilient community, guided by the spirit of **Each One Teach One**.</p>
+            <a href="#get-involved" class="btn">How You Can Help</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2>About Us</h2>
+        <p>At Our Community in Unity, we are driven by a profound commitment to fostering growth, sustainability, and positive transformation within our community. Our journey began with a clear purpose: to build a united and resilient community through empowerment, education, and shared resources.</p>
+        <p>Our work is deeply rooted in our motto, **"Each One Teach One,"** a principle that guides every initiative and interaction. We believe that by empowering individuals with knowledge and support, they in turn can uplift others, creating a powerful ripple effect of positive change.</p>
+
+        <h3>Our Mission, Vision, & Values</h3>
+        <div class="flex-container">
+            <div class="flex-item">
+                <span class="icon fas fa-book"></span>
+                <h4>Mission</h4>
+                <p>To build a united and resilient community by empowering individuals through education, support, and shared resources. To create opportunities for growth and sustainable development for individuals and families. To engage in fundraising and partnerships to support community-driven projects.</p>
+            </div>
+            <div class="flex-item">
+                <span class="icon fas fa-eye"></span>
+                <h4>Vision</h4>
+                <p>To see a community where every individual is empowered, opportunities abound, and sustainable solutions drive social and cultural transformation.</p>
+            </div>
+            <div class="flex-item">
+                <span class="icon fas fa-handshake"></span>
+                <h4>Core Values</h4>
+                <p>Transparency, Collaboration, Integrity, Innovation, and Community Empowerment.</p>
+            </div>
+        </div>
+
+        <div class="leader-bio">
+            <img src="images/team/hero.jpg" alt="Cameron De Vries - Founder of Our Community in Unity"> <h3>Our Founder's Journey: A Testament to "Each One Teach One"</h3>
+            <p><strong>Cameron De Vries</strong>, Founder and Director of Our Community in Unity, embodies the very spirit of our motto, 'Each One Teach One.' Despite leaving formal schooling in Grade 9, Cameron's insatiable drive for knowledge and growth led to a remarkable journey of self-education and hands-on mastery. His diverse background includes sound engineering, event livestreaming, construction, security, and business development.</p>
+            <p>His professional history, from entrepreneurial ventures in his late teens to excelling in technical and creative fields like the printing industry and film, demonstrates a powerful commitment to continuous learning and adaptation.</p>
+            <p>Having personally navigated paths less traveled, Cameron understands the challenges and immense potential within our community. His journey is a living example that skills, determination, and the willingness to learn and share knowledge can create profound opportunities for growth, truly living the 'Each One Teach One' philosophy.</p>
+            <p>This unique blend of diverse experience and a profound understanding of community needs drives 'Our Community in Unity' forward, ensuring our programs are practical, relevant, and deeply impactful.</p>
+            <p>Cameron is supported in the governance of 'Our Community in Unity' by Bertha De Vries (Co-Founder) and Antonio Clifford Marais (Director), who are vital for our organizational compliance and strategic oversight.</p>
+        </div>
+    </section>
+
+    <section id="what-we-do" class="container">
+        <h2>What We Do: Our Programs & Impact</h2>
+        <p>Our comprehensive programs are designed to uplift and empower every individual in our community, fostering growth and resilience. We provide essential support, innovative training, and sustainable solutions, all guided by the principle of **Each One Teach One**.</p>
+
+        <div class="flex-container program-list">
+            <div class="flex-item">
+                <span class="icon fas fa-graduation-cap"></span>
+                <h3>Education & Training: Equipping for the Future</h3>
+                <p>Our workshops, vocational training, and community education initiatives embody 'Each One Teach One,' fostering environments where skills are shared and knowledge is built collectively. We provide essential skills and cutting-edge knowledge to ensure our community members are competitive and empowered in the modern landscape. Our programs include:</p>
+                <ul>
+                    <li><strong>Digital Literacy & Innovation:</strong>
+                        <ul>
+                            <li><strong>AI Prompting Fundamentals:</strong> Unlock the power of Artificial Intelligence by learning how to effectively communicate with AI tools, a critical skill for the digital age.</li>
+                            <li><strong>Email Marketing Strategies:</strong> Master the art of engaging audiences and promoting initiatives through effective email campaigns, essential for business and personal branding.</li>
+                            <li>Basic Computer Skills & Online Safety.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Job Readiness & Vocational Skills:</strong>
+                        <ul>
+                            <li>CV Writing & Interview Preparation.</li>
+                            <li>Professional Communication.</li>
+                            <li>Online Job Searching.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Financial Literacy:</strong> Basic Budgeting & Saving.</li>
+                </ul>
+            </div>
+            <div class="flex-item">
+                <span class="icon fas fa-hands-helping"></span>
+                <h3>Social Support & Community Empowerment</h3>
+                <p>Through mentoring and resource sharing, we facilitate connections where 'Each One Teaches One,' providing crucial support and guidance for upliftment. We provide resources, mentoring, and counseling services to those in need.</p>
+                <ul>
+                    <li>Mentorship programs for youth and unemployed individuals.</li>
+                    <li>Access to essential community resources.</li>
+                    <li>Counseling and support services.</li>
+                </ul>
+            </div>
+            <div class="flex-item">
+                <span class="icon fas fa-seedling"></span>
+                <h3>Sustainable Development Initiatives</h3>
+                <p>Our initiatives promote 'Each One Teach One' by sharing best practices for environmental conservation and social housing, building a sustainable future together.</p>
+                <ul>
+                    <li>Environmental conservation projects.</li>
+                    <li>Support for sustainable housing solutions.</li>
+                    <li>Community development projects.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="flex-container">
+                <div class="flex-item" style="flex-basis: 95%; max-width: 800px; margin-top: 40px; background-color: var(--light-blue);">
+                    <span class="icon fas fa-podcast"></span>
+                    <h3>Our Community in Unity Podcast (Coming Soon!)</h3>
+                    <p style="text-align: center;">Stay tuned for inspiring stories and discussions on digital skills, community development, entrepreneurship, and much more.</p>
+                    <a href="https://anchor.fm/s/fff9d9cc/podcast/rss" class="btn" target="_blank">Listen to the Podcast Now (External Link)</a>
+                </div>
+            </div>
+            <h3 style="margin-top: 40px; text-align: center;">Our First Pilot Project: Community Skills Boost Workshop Series</h3>
+            <p style="text-align: center;">We're thrilled to launch our first concrete step towards empowerment! This pilot series, focusing on a specific, in-demand skill, will directly demonstrate the power of our 'Each One Teach One' approach.</p>
+            <p style="text-align: center;"><strong>Initial Workshop Focus:</strong> Our upcoming workshop will focus on "Introduction to AI Prompting for Job Seekers," teaching participants how to leverage AI to draft effective CVs, cover letters, and enhance their job search strategy.</p>
+            <p style="text-align: center;"><strong>Impact:</strong> This initial workshop aims to equip [X number, e.g., 10-15] participants with cutting-edge digital skills, directly enhancing their employability and confidence in the digital economy.</p>
+            <p style="text-align: center; margin-top: 30px;"><a href="#get-involved" class="btn">Support Our Pilot Project</a></p>
+
+            <h3 style="margin-top: 40px; text-align: center;">Stories of Change (Coming Soon!)</h3>
+            <p style="text-align: center;">Hear firsthand from those whose lives we're transforming through the power of 'Each One Teach One'.</p>
+        </section>
+
+        <section id="classroom" class="container">
+            <h2>Our Classroom: Learn & Grow (Coming Soon!)</h2>
+            <p style="text-align: center;">Our comprehensive online classroom is currently under development. Soon, members will be able to access free coding and marketing courses, powerful AI tools, and creative platforms – all leveraging free tiers to help you learn and create without cost!</p>
+            <p style="text-align: center; margin-top: 20px;">Stay tuned for our official launch and exciting new learning opportunities!</p>
+        </section>
+        <section id="get-involved" class="container">
+            <h2>Get Involved: Be a Part of the "Each One Teach One" Movement!</h2>
+            <p style="text-align: center;">Your support, whether through time, resources, or financial contributions, directly empowers individuals and strengthens our community.</p>
+
+            <div class="flex-container">
+                <div class="flex-item">
+                    <span class="icon fas fa-heart"></span>
+                    <h3>Donate</h3>
+                    <p>Your contribution directly fuels our 'Each One Teach One' programs, empowering individuals to learn, grow, and then share their knowledge with others. Every Rand makes a difference!</p>
+                    <p><strong>Bank Details:</strong></p>
+                    <p>Bank Name: Capitec Business Account</p>
+                    <p>Account Name: Our Community in Unity</p>
+                    <p>Account Number: 1053233388</p>
+                    <p>Branch Code: [Insert Capitec Branch Code Here]</p> <p>SWIFT/BIC: [Insert SWIFT/BIC if applicable for international donations]</p>
+                    <a href="#" class="btn">Donate Online (Coming Soon!)</a>
+                </div>
+                <div class="flex-item">
+                    <span class="icon fas fa-hand-holding-heart"></span>
+                    <h3>Volunteer</h3>
+                    <p>Are you ready to live 'Each One Teach One'? Share your expertise as a workshop facilitator, mentor, or support our operations. Your knowledge can transform a life.</p>
+                    <p>We need help with:</p>
+                    <ul>
+                        <li>Workshop Facilitation (especially in AI Prompting, Email Marketing, Job Readiness).</li>
+                        <li>Mentorship for youth and job seekers.</li>
+                        <li>Administrative support.</li>
+                        <li>Event coordination.</li>
+                    </ul>
+                    <a href="mailto:info@ourcommunity.agency" class="btn">Volunteer Today</a>
+                </div>
+                <div class="flex-item">
+                    <span class="icon fas fa-users"></span>
+                    <h3>Partner With Us</h3>
+                    <p>Collaborate with 'Our Community in Unity' and extend the reach of 'Each One Teach One.' Together, we can create a ripple effect of empowerment and sustainable development across Cape Town.</p>
+                    <p>We are seeking partnerships with local government, corporate sponsors, philanthropic organizations, and other NGOs.</p>
+                    <a href="mailto:info@ourcommunity.agency" class="btn">Explore Partnership</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Contact Us</h2>
+            <p style="text-align: center;">We'd love to hear from you!</p>
+
+            <div style="text-align: center; margin-bottom: 20px;">
+                <h3 style="margin-bottom: 5px;">Get in Touch Directly</h3>
+                <p><strong>Our Office:</strong> 94 Camellia street, Bonteheuwel, Cape Town, 7764, South Africa.</p>
+                <p><strong>Phone:</strong> +27 (0) 815 693 926</p>
+                <p><strong>Email:</strong> info@ourcommunity.agency</p>
+                <p><strong>Office Hours:</strong> Monday - Friday: 9:00 AM - 5:00 PM</p>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h3 style="margin-bottom: 10px;">Follow Us</h3>
+                <p>
+                    <a href="https://www.facebook.com/communityinunityza" target="_blank" style="margin: 0 10px; text-decoration: none; color: #3b5998; font-weight: bold;"><span class="fab fa-facebook-f"></span> Facebook</a>
+                    <a href="https://x.com/ourcommunityag" target="_blank" style="margin: 0 10px; text-decoration: none; color: #000; font-weight: bold;"><span class="fab fa-twitter"></span> X (Twitter)</a>
+                    <a href="https://www.instagram.com/ourcommunityza/" target="_blank" style="margin: 0 10px; text-decoration: none; color: #E1306C; font-weight: bold;"><span class="fab fa-instagram"></span> Instagram</a>
+                    <a href="[Insert LinkedIn Link Here]" target="_blank" style="margin: 0 10px; text-decoration: none; color: #0077B5; font-weight: bold;"><span class="fab fa-linkedin-in"></span> LinkedIn: Our Community in Unity</a>
+                </p>
+            </div>
+
+            <form>
+                <p><label for="name">Name:</label><br><input type="text" id="name" name="name" required></p>
+                <p><label for="email">Email:</label><br><input type="email" id="email" name="email" required></p>
+                <p><label for="message">Message:</label><br><textarea id="message" name="message" rows="5" required></textarea></p>
+                <p><button type="submit" class="btn">Send Message</button></p>
+            </form>
+        </section>
+
+        <footer>
+            <div class="container">
+                <p>&copy; 2024 Our Community in Unity. All rights reserved.</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        <script>
+            // Supabase client initialization
+            const SUPABASE_URL = 'https://ycrmkofqhtlkexfbpljy.supabase.co'; // Your actual Supabase Project URL
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inljcm1rb2ZxaHRsa2V4ZmJwbGp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzMDQyMTgsImV4cCI6MjA2Mzg4MDIxOH0.RttjxZ_VSoZbeFWmI6nD0mSQb40ozvoPT6u7eRd9Tpo'; // Your actual Supabase public (anon) key
+
+            const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            // Get DOM elements for authentication and classroom (these will be hidden with CSS for "Coming Soon")
+            const authUi = document.getElementById('auth-ui');
+            const signupForm = document.getElementById('signup-form');
+            const loginForm = document.getElementById('login-form');
+            const logoutButton = document.getElementById('logout-button');
+            const authStatus = document.getElementById('auth-status');
+            const classroomContent = document.getElementById('classroom-content');
+            const resourcesContainer = document.getElementById('resources-container');
+            const resetPasswordLink = document.getElementById('reset-password-link');
+
+            // --- Authentication Functions (will not be called directly if classroom is "Coming Soon") ---
+            // These functions are kept for future use if classroom is enabled later
+            async function checkUser() {
+                const { data: { user }, error } = await supabase.auth.getUser();
+                if (error) { console.error('Error getting user:', error); return; }
+                // In "Coming Soon" mode, we don't display auth UI or fetch resources dynamically
+            }
+            if (signupForm) {
+                signupForm.addEventListener('submit', async (event) => { event.preventDefault(); /* Placeholder */ });
+            }
+            if (loginForm) {
+                loginForm.addEventListener('submit', async (event) => { event.preventDefault(); /* Placeholder */ });
+            }
+            if (logoutButton) {
+                logoutButton.addEventListener('click', async () => { /* Placeholder */ });
+            }
+            if (resetPasswordLink) {
+                resetPasswordLink.addEventListener('click', async (event) => { /* Placeholder */ });
+            }
+            async function fetchClassroomResources() { /* Placeholder */ }
+
+            // Initial check when the page loads (for contact form and podcast)
+            document.addEventListener('DOMContentLoaded', function() {
+                const contactForm = document.querySelector('#contact form');
+                const podcastRSSFeedUrl = 'https://anchor.fm/s/fff9d9cc/podcast/rss'; // Your podcast RSS feed URL
+                const episodeList = document.getElementById('episode-list');
+
+
+                // Using the SAME Supabase client as for authentication and classroom
+                const supabaseContact = supabase; 
+
+                if (contactForm) {
+                    contactForm.addEventListener('submit', async function(event) {
+                        event.preventDefault(); // Prevent default form submission
+
+                        const submitButton = contactForm.querySelector('button[type="submit"]');
+                        submitButton.disabled = true; // Disable button to prevent multiple submissions
+                        submitButton.textContent = 'Sending...'; // Change button text
+
+                        const formData = {
+                            name: contactForm.name.value,
+                            email: contactForm.email.value,
+                            message: contactForm.message.value
+                        };
+
+                        try {
+                            // 1. Insert data into Supabase database table (contact_submissions)
+                            const { data, error } = await supabaseContact
+                                .from('contact_submissions') // Your table name
+                                .insert([formData]);
+
+                            if (error) {
+                                console.error('Supabase insert error:', error);
+                                alert('Error submitting message: ' + error.message);
+                            } else {
+                                console.log('Submission data saved to DB:', data);
+
+                                // 2. Invoke Supabase Edge Function to send email notification
+                                const { data: edgeFunctionData, error: edgeFunctionError } = await supabaseContact.functions.invoke('send-contact-email', {
+                                    body: formData, // Pass the form data to the function
+                                    headers: { 'Content-Type': 'application/json' },
+                                });
+
+                                if (edgeFunctionError) {
+                                    console.error('Edge Function invocation error:', edgeFunctionError);
+                                    // Alert that message was saved, but email notification failed
+                                    alert('Your message has been sent to our records, but we could not send an email notification. We will still get back to you!');
+                                } else {
+                                    console.log('Edge Function response:', edgeFunctionData);
+                                    alert('Your message has been sent successfully!');
+                                }
+
+                                contactForm.reset(); // Clear the form
+                            }
+                        } catch (error) {
+                            console.error('Network or unexpected error:', error);
+                            alert('An unexpected error occurred. Please try again.');
+                        } finally {
+                            submitButton.disabled = false; // Re-enable button
+                            submitButton.textContent = 'Send Message'; // Reset button text
+                        }
+                    });
+                }
+
+                // Podcast RSS Feed - Now a simple external link, no dynamic loading
+                // The JS for dynamic loading is removed from this block for simplicity
+            });
+        </script>
+        </body>
+    </html>
