@@ -46,3 +46,5 @@ docs: Add comprehensive README.md with full deployment guide [Deployment trigger
 fix: Final trigger after Pages project and custom domain removal
 fix: New trigger after addressing wrangler deploy error
 feat: Update wrangler.jsonc with correct project name
+[Deployment attempt after wrangler.jsonc 'main' fix]
+fix: Trigger deployment after wrangler.jsonc update
