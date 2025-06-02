@@ -334,6 +334,81 @@
             margin-bottom: 1em;
         }
 
+        /* Podcast Section */
+        #podcast-section { /* Changed ID for clarity now that dynamic loading is restored */
+            background-color: var(--light-blue); /* Light blue background */
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 25px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); /* Subtle inner shadow */
+            text-align: center; /* Center content in this box */
+        }
+        #podcast-section h3 {
+            color: var(--dark-blue);
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        #podcast-section p {
+            text-align: center;
+        }
+        #podcast-section .btn {
+            margin-top: 15px;
+        }
+        #podcast-section #episode-list { /* Style for dynamically loaded episodes */
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+            text-align: left; /* Align text within list items */
+        }
+        #podcast-section #episode-list li {
+            background-color: var(--background-white);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px var(--shadow-light);
+            border-left: 5px solid var(--primary-blue);
+            transition: transform 0.2s ease;
+            position: relative; /* For the checkmark */
+            padding-left: 25px; /* Space for checkmark */
+        }
+        #podcast-section #episode-list li:hover {
+            transform: translateX(5px);
+        }
+        #podcast-section #episode-list li strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+        #podcast-section #episode-list li a {
+            color: var(--primary-blue); /* Ensure link color is consistent */
+            font-weight: bold;
+        }
+        #podcast-section #episode-list li small {
+            color: var(--text-light);
+            font-size: 0.85em;
+            display: block; /* Ensure date is on its own line */
+            margin-bottom: 5px;
+        }
+        #podcast-section #episode-list li p {
+            font-size: 0.9em;
+            line-height: 1.4;
+            color: var(--text-dark);
+            margin-bottom: 0;
+        }
+        #podcast-section #episode-list li::before {
+            content: "\f130"; /* Play icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            color: var(--dark-blue);
+            position: absolute;
+            left: 10px; /* Adjust position */
+            top: 15px; /* Adjust position */
+            font-size: 1em;
+            line-height: 1; /* Align with text */
+        }
+
+
         /* Get Involved Section */
         #get-involved .flex-item {
             text-align: center;
@@ -619,9 +694,16 @@
             <div class="flex-container">
                 <div class="flex-item" style="flex-basis: 95%; max-width: 800px; margin-top: 40px; background-color: var(--light-blue);">
                     <span class="icon fas fa-podcast"></span>
-                    <h3>Our Community in Unity Podcast (Coming Soon!)</h3>
-                    <p style="text-align: center;">Stay tuned for inspiring stories and discussions on digital skills, community development, entrepreneurship, and much more.</p>
+                    <h3>Our Community in Unity Podcast</h3>
+                    <p style="text-align: center;">Dive deeper into the issues that matter to our community, hear inspiring stories of empowerment, and explore how 'Each One Teach One' is making a difference. Our podcast brings conversations, insights, and solutions directly to you.</p>
+                    <p style="text-align: center;">Tune in to discussions on digital skills, community development, entrepreneurship, and much more, all designed to foster a united and resilient community.</p>
                     <a href="https://anchor.fm/s/fff9d9cc/podcast/rss" class="btn" target="_blank">Listen to the Podcast Now (External Link)</a>
+                    <div id="podcast-episodes">
+                        <h4>Latest Episodes:</h4>
+                        <ul id="episode-list">
+                            <li>Loading episodes...</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <h3 style="margin-top: 40px; text-align: center;">Our First Pilot Project: Community Skills Boost Workshop Series</h3>
@@ -754,12 +836,12 @@
             const loginForm = document.getElementById('login-form');
             const logoutButton = document.getElementById('logout-button');
             const authStatus = document.getElementById('auth-status');
-            const classroomContent = document.getElementById('classroom-content');
-            const resourcesContainer = document.getElementById('resources-container');
+            const classroomContent = document.getElementById('classroom-content'); // This div contains the "Coming Soon!" content
+            const resourcesContainer = document.getElementById('resources-container'); // This might not be needed if content is static "Coming Soon!"
             const resetPasswordLink = document.getElementById('reset-password-link');
 
             // --- Authentication Functions ---
-            // These functions are now fully functional, as per your request
+            // These functions are now fully functional for the signup/login process
 
             // Function to check and update UI based on login status
             async function checkUser() {
@@ -769,7 +851,7 @@
                     console.error('Error getting user:', error);
                     authStatus.textContent = 'Error checking login status.';
                     authUi.style.display = 'block'; // Show forms if error or logged out
-                    classroomContent.style.display = 'none'; // Hide content
+                    classroomContent.style.display = 'none'; // Hide content if not logged in
                     logoutButton.style.display = 'none';
                     return;
                 }
@@ -778,8 +860,7 @@
                     authStatus.textContent = `Logged in as: ${user.email}`;
                     authUi.style.display = 'none'; // Hide signup/login forms
                     logoutButton.style.display = 'block'; // Show logout button
-                    // Keep classroomContent hidden if it's "Coming Soon!" but show if actual content is enabled
-                    classroomContent.style.display = 'block'; // Temporarily show to check if content logic was there, otherwise it's just "Coming Soon!" text
+                    classroomContent.style.display = 'block'; // Show "Coming Soon!" content for logged-in users
                 } else {
                     authStatus.textContent = 'Please sign up or log in to access the Classroom.';
                     authUi.style.display = 'block'; // Show signup/login forms
@@ -954,10 +1035,38 @@
                     });
                 }
 
-                // Podcast RSS Feed - Now a simple external link, no dynamic loading.
-                // The JS for dynamic loading is removed from this block for simplicity.
-                // The 'episodeList' and 'podcastRSSFeedUrl' variables are kept for context if re-enabled later.
-                if (episodeList && podcastRSSFeedUrl) { /* This block will not execute as episodeList is not found */ }
+                // --- Podcast RSS Feed Fetching Logic (Restored to dynamic) ---
+                // The dynamic podcast loading logic is now re-enabled
+                if (episodeList && podcastRSSFeedUrl) {
+                    fetch(podcastRSSFeedUrl)
+                        .then(response => response.text())
+                        .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
+                        .then(data => {
+                            const items = data.querySelectorAll("item");
+                            episodeList.innerHTML = ''; // Clear "Loading episodes..."
+
+                            const numberOfEpisodesToShow = 3; // Display top 3 episodes
+
+                            items.slice(0, numberOfEpisodesToShow).forEach(item => {
+                                const title = item.querySelector("title") ? item.querySelector("title").textContent : "No title";
+                                const link = item.querySelector("link") ? item.querySelector("link").textContent : "#";
+                                const pubDate = item.querySelector("pubDate") ? new Date(item.querySelector("pubDate").textContent).toLocaleDateString() : "No date";
+                                const description = item.querySelector("description") ? item.querySelector("description").textContent : "No description available.";
+
+                                const listItem = document.createElement('li');
+                                listItem.innerHTML = `
+                                    <strong><a href="${link}" target="_blank">${title}</a></strong>
+                                    <br><small>${pubDate}</small>
+                                    <p>${description.length > 150 ? description.substring(0, 150) + '...' : description}</p>
+                                `;
+                                episodeList.appendChild(listItem);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching or parsing RSS feed:', error);
+                            episodeList.innerHTML = '<li>Error loading podcast episodes. Please try again later.</li>';
+                        });
+                }
 
                 // Initial check for auth state (after DOM content is loaded)
                 checkUser();
