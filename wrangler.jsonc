@@ -3,7 +3,7 @@
 {
   "name": "ourcommunity-agency", // A unique name for your project, matching your Cloudflare Pages project name
   "compatibility_date": "2025-06-02", // Use today's date or a future date for compatibility
-  "main": "index.html", // This is usually for Workers, but required for Pages Workers mode. Can be dummy.
+  // REMOVED: "main": "index.html", // This line caused the error for static sites.
   "assets": {
     "directory": "frontend/public" // This is the crucial line: points to your static files
   }
