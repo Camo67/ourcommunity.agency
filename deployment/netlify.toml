@@ -1,4 +1,4 @@
-# Netlify configuration file
+# netlify.toml configuration file for Cloudflare Pages
 
 [build]
   # Directory that contains the deploy-ready HTML files and assets
