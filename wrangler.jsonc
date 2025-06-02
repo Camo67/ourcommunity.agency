@@ -1,0 +1,10 @@
+// wrangler.jsonc configuration file for Cloudflare Pages static assets
+
+{
+  "name": "ourcommunity-agency", // A unique name for your project, matching your Cloudflare Pages project name
+  "compatibility_date": "2025-06-02", // Use today's date or a future date for compatibility
+  "main": "index.html", // This is usually for Workers, but required for Pages Workers mode. Can be dummy.
+  "assets": {
+    "directory": "frontend/public" // This is the crucial line: points to your static files
+  }
+}
