@@ -3,3 +3,5 @@
   "compatibility_date": "2025-07-22", // Today's date
   "pages_build_output_dir": "." // THIS IS THE CRUCIAL CHANGE: Points to the root directory
 }
+
+fix: Update wrangler.jsonc to point to root directory for Pages
